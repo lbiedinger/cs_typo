@@ -113,6 +113,26 @@ class Admin::ContentController < Admin::BaseController
     render :text => nil
   end
 
+  def merge
+    id1 = params['article_id'] 
+    id2 = params['merge_with'] 
+    if id1 && id2
+      article1 = Article.find(id1)  
+      article2 = Article.find(id2)
+      article1.update_attributes body: "#{article1.body} #{article2.body}"
+      article2.comments.each do |comment|
+        comment.update_attributes article_id: id1
+      end
+      article2.destroy
+      flash[:info] = _("Successfully merged")
+      redirect_to "/admin/content/edit/#{id1}"
+    else
+      redirect_to "/admin/content/edit/#{id1}"
+      flash[:error] = _("Error, didn't specify 2 articles to merge #{params.inspect}")
+      return
+    end
+  end
+
   protected
 
   def get_fresh_or_existing_draft_for_article

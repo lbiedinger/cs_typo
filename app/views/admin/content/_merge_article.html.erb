@@ -1,0 +1,6 @@
+
+<input type="text" id="merge_with" name="merge_with" size="20" />
+<input type="hidden" id="article_id" name="article_id" value="<%= @article.id %>"  size="20" />
+
+<%= button_to "Merge", {:controller => 'admin/content', :action => 'merge' }, name: "Merge", :class => 'btn' %>
+
