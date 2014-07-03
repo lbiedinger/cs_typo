@@ -70,7 +70,7 @@ Given /^(?:|I )am on (.+)$/ do |page_name|
 end
 
 Given /^(?:|I )visit the edit article page for "(.*?)"$/ do |article_name|
-  visit "admin/content/edit/#{Article.find_by_title(article_name)}"
+  visit "/admin/content/edit/#{Article.find_by_title(article_name).id}"
 end
 
 When /^(?:|I )go to (.+)$/ do |page_name|
