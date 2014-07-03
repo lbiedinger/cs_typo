@@ -124,7 +124,7 @@ class Admin::ContentController < Admin::BaseController
         article2.comments.each do |comment|
           comment.update_attributes article_id: id1
         end
-        article2.destroy
+        Article.find(id2).destroy
         flash[:info] = _("Successfully merged")
         redirect_to "/admin/content/edit/#{id1}"
       else
